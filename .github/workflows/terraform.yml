@@ -34,7 +34,7 @@ jobs:
     - name: Generate variable
       id: vars
       run: |
-        echo "::set-output name=name::$(curl -X GET "https://api.todoist.com/rest/v1/projects/2264420260" -H "Authorization: Bearer 7bfca71a9f3343895e02d7d8c70979c2003fb3ce" | jq '.name')"
+        echo "::set-output name=name::$(curl -X GET "https://api.todoist.com/rest/v1/projects/2264420260" -H "Authorization: Bearer 7bfca71a9f3343895e02d7d8c70979c2003fb3ce" | jq -r '.name')"
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
@@ -43,7 +43,7 @@ jobs:
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      run: terraform apply -var="name=${{ steps.vars.outputs.name }}"
+      run: terraform apply -var="name=${{ steps.vars.outputs.name }}" --auto-approve
       
     - name: Terraform Destroy
-      run: terraform destroy -var="name=${{ steps.vars.outputs.name }}"
+      run: terraform destroy -var="name=${{ steps.vars.outputs.name }}" --auto-approve
