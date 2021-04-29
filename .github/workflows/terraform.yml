@@ -34,7 +34,7 @@ jobs:
     - name: Generate variable
       id: vars
       run: |
-        echo "::set-output name=name::$(curl -X GET "https://api.todoist.com/rest/v1/projects/2264420260" -H "Authorization: Bearer 7bfca71a9f3343895e02d7d8c70979c2003fb3ce" | jq -r '.name')"
+        echo "::set-output name=name::$(curl -X GET "https://api.todoist.com/rest/v1/projects/2264420260" -H "Authorization: Bearer ${{ secrets.TODOIST_API_TOKEN }}" | jq -r '.name')"
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
