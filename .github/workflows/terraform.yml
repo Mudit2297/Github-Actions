@@ -36,6 +36,7 @@ jobs:
         echo "::set-output name=name::Hosted-Runner"
         cd /etc/systemd/system/
         ls
+        cat runner-provisioner.service
       # echo "::set-output name=name::$(curl -X GET "https://api.todoist.com/rest/v1/projects/2264420260" -H "Authorization: Bearer ${{ secrets.TODOIST_API_TOKEN }}" | jq -r '.name')"
 
     # Generates an execution plan for Terraform
